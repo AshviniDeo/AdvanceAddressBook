@@ -15,7 +15,7 @@ public class DashBoard {
 			System.out.println(":: Welcome to AddressBook ::");
 			System.out.println(" :: Main Menu ::");
 			System.out.println(
-					"  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n  4.Add Contact to AddressBook ");
+					"  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n  4.Add Contact to AddressBook \n  5.Search Contact ");
 			int choice = UtilScanner.getInt(" Your Choice : ");
 
 			switch (choice) {
@@ -33,6 +33,11 @@ public class DashBoard {
 
 			case 4:
 				addContactToAddressBook();
+				break;
+				
+			case 5:
+				serachDetails();
+				break;
 
 			default:
 				break;
@@ -40,6 +45,12 @@ public class DashBoard {
 
 		}
 
+	}
+
+	private void serachDetails() {
+		String data = UtilScanner.getString(" City Name or State Name to search : ");
+		serve.searchContact(data);
+		
 	}
 
 	private void addContactToAddressBook() {

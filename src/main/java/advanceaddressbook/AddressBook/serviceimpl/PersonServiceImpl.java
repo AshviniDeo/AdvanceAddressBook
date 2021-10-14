@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
@@ -53,5 +55,17 @@ public class PersonServiceImpl implements IPersonService {
 			System.out.println("Addressbook->" + personContact.getKey());
 		}
 	}
+
+	public void searchContact(String data) {
+		element.stream().forEach(a->{if(a.getCity().equals(data) || a.getState().equals(data)) System.out.println(a);});
+	for (PersonContact personContact : element) {
+		if(personContact.getCity().equals(data) || personContact.getState().equals(data)) {
+			System.out.println(personContact);
+		}
+	}
+		
+	}
+
+	
 
 }
