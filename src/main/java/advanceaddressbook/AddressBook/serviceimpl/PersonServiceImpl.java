@@ -1,8 +1,11 @@
 package advanceaddressbook.AddressBook.serviceimpl;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
 import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.stream.Collector;
@@ -44,11 +47,11 @@ public class PersonServiceImpl implements IPersonService {
 	public void addToAddressBook(String name, PersonContact person) {
 
 		element.add(person);
-		
-			if (!book.containsValue(element)) {
-				book.put(name, element);
-			}
-			
+
+		if (!book.containsValue(element)) {
+			book.put(name, element);
+		}
+
 		System.out.println(book.toString());
 
 		for (Entry<String, Object> personContact : book.entrySet()) {
@@ -57,15 +60,33 @@ public class PersonServiceImpl implements IPersonService {
 	}
 
 	public void searchContact(String data) {
-		element.stream().forEach(a->{if(a.getCity().equals(data) || a.getState().equals(data)) System.out.println(a);});
-	for (PersonContact personContact : element) {
-		if(personContact.getCity().equals(data) || personContact.getState().equals(data)) {
-			System.out.println(personContact);
-		}
-	}
-		
+
+		element.stream().forEach(a -> {
+			if (a.getCity().equals(data) || a.getState().equals(data))
+				System.out.println(a);
+		});
+
 	}
 
-	
+	public void displayContact(String data) {
+		Dictionary<String, PersonContact> library = new Hashtable();
+
+		if (data.equals("CITY")) {
+			element.stream().forEach(a -> {
+				library.put(a.getCity(), a);
+				System.out.println(a.getCity() + "->" + a.toString());
+			});
+		} else if (data.equals("STATE")) {
+
+			element.stream().forEach(a -> {
+				library.put(a.getState(), a);
+				System.out.println(a.getState() + "->" + a.toString());
+			});
+		} else {
+
+			System.out.println("No contacts Available.");
+		}
+
+	}
 
 }
