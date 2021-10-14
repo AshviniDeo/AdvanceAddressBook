@@ -14,7 +14,7 @@ public class DashBoard {
 		while (!exit) {
 			System.out.println(":: Welcome to AddressBook ::");
 			System.out.println(" :: Main Menu ::");
-			System.out.println("  1.Add Contact \n  2.Edit Contact\n");
+			System.out.println("  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n ");
 			int choice = UtilScanner.getInt(" Your Choice : ");
 
 			switch (choice) {
@@ -26,6 +26,9 @@ public class DashBoard {
 				editDetails();
 				break;
 
+			case 3:
+				deleteDetails();
+
 			default:
 				break;
 			}
@@ -34,16 +37,63 @@ public class DashBoard {
 
 	}
 
+	private void deleteDetails() {
+		String name = UtilScanner.getString(" First Name To Delete : ");
+		PersonContact person = serve.getPerson(name);
+		serve.deletePerson(person);
+		}
+
 	private void editDetails() {
 		String name = UtilScanner.getString(" Person Name to Update : ");
 		PersonContact update = serve.getPerson(name);
 		boolean exit = false;
 		while (!exit) {
-			System.out.println(" :: Details To update :: \n 1.First Name \n 2.Second Name \n 3.Address \n 4.City\n 5.State\n 6.Zipcode\n 7.Phone Number \n 8.Email \n 9.Exit");
+			System.out.println(
+					" :: Details To update :: \n 1.First Name \n 2.Second Name \n 3.Address \n 4.City\n 5.State\n 6.Zipcode\n 7.Phone Number \n 8.Email \n 9.Exit");
 			int choice = UtilScanner.getInt(" Enter Choice : ");
 			switch (choice) {
-			case 1: String fname = UtilScanner.getString(" First Name : ");
+			case 1:
+				String fname = UtilScanner.getString(" First Name : ");
 				update.setFname(fname);
+				break;
+
+			case 2:
+				String lname = UtilScanner.getString(" Last Name : ");
+				update.setLname(lname);
+				break;
+
+			case 3:
+				String addr = UtilScanner.getString(" Address : ");
+				update.setAddress(addr);
+				break;
+
+			case 4:
+				String city = UtilScanner.getString(" City Name : ");
+				update.setCity(city);
+				break;
+
+			case 5:
+				String state = UtilScanner.getString(" State : ");
+				update.setState(state);
+				break;
+
+			case 6:
+				String zip = UtilScanner.getString(" ZipCode : ");
+				update.setZipcode(zip);
+				break;
+
+			case 7:
+				String num = UtilScanner.getString(" Phone Number : ");
+				update.setPhone(num);
+				break;
+
+			case 8:
+				String email = UtilScanner.getString(" Email : ");
+				update.setEmail(email);
+				break;
+
+			case 9:
+				exit = true;
 				break;
 
 			default:
