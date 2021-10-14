@@ -12,10 +12,14 @@ public class PersonServiceImpl implements IPersonService{
 	@Override
 	public void addPerson(PersonContact person) {
 		contact.add(person);
-		System.out.println(contact.size());
+	}
+	public PersonContact getPerson(String name) {
 		for (PersonContact personContact : contact) {
-			System.out.println(personContact.toString());
+			if(personContact.getFname().equals(name)) {
+				return personContact;
+			}
 		}
+		return null;
 	}
 
 }
