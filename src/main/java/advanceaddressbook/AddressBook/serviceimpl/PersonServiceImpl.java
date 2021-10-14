@@ -3,8 +3,10 @@ package advanceaddressbook.AddressBook.serviceimpl;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.collections4.MultiMap;
@@ -41,9 +43,10 @@ public class PersonServiceImpl implements IPersonService {
 
 	public void addToAddressBook(String name, PersonContact person) {
 		book.put(name, person);
-		System.out.println(book.toString());
 		
-		
+		for (Entry<String, Object> personContact : book.entrySet()) {
+			System.out.println(personContact.getKey());
+		}
 	}
 	
 	

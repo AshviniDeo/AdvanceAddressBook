@@ -14,7 +14,8 @@ public class DashBoard {
 		while (!exit) {
 			System.out.println(":: Welcome to AddressBook ::");
 			System.out.println(" :: Main Menu ::");
-			System.out.println("  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n  4.Add Contact to AddressBook ");
+			System.out.println(
+					"  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n  4.Add Contact to AddressBook ");
 			int choice = UtilScanner.getInt(" Your Choice : ");
 
 			switch (choice) {
@@ -29,8 +30,9 @@ public class DashBoard {
 			case 3:
 				deleteDetails();
 				break;
-				
-			case 4: addContactToAddressBook();
+
+			case 4:
+				addContactToAddressBook();
 
 			default:
 				break;
@@ -41,29 +43,33 @@ public class DashBoard {
 	}
 
 	private void addContactToAddressBook() {
-		String name = UtilScanner.getString(" AddressBook Name : ");
-		int data = UtilScanner.getInt(" Number of contacts to add : ");
-		for(int i = 0; i<data; i++) {
-			PersonContact person = new PersonContact();
-			person.setFname(UtilScanner.getString(" First Name : "));
-			person.setLname(UtilScanner.getString(" Second Name : "));
-			person.setAddress(UtilScanner.getString(" Address : "));
-			person.setCity(UtilScanner.getString(" City Name : "));
-			person.setState(UtilScanner.getString(" State Name : "));
-			person.setZipcode(UtilScanner.getString(" Zipcode : "));
-			person.setPhone(UtilScanner.getString(" Phone Number : "));
-			person.setEmail(UtilScanner.getString(" Email : "));
-			
-			serve.addToAddressBook(name,person);
-			
-		}		
+		int multiAddressBook = UtilScanner.getInt(" Number of Addressbook To Add : ");
+		for (int i = 0; i < multiAddressBook; i++) {
+			String name = UtilScanner.getString(" AddressBook Name : ");
+			int data = UtilScanner.getInt(" Number of contacts to add : ");
+			for (int j = 0; j < data; j++) {
+				PersonContact person = new PersonContact();
+				person.setFname(UtilScanner.getString(" First Name : "));
+				person.setLname(UtilScanner.getString(" Second Name : "));
+				person.setAddress(UtilScanner.getString(" Address : "));
+				person.setCity(UtilScanner.getString(" City Name : "));
+				person.setState(UtilScanner.getString(" State Name : "));
+				person.setZipcode(UtilScanner.getString(" Zipcode : "));
+				person.setPhone(UtilScanner.getString(" Phone Number : "));
+				person.setEmail(UtilScanner.getString(" Email : "));
+
+				serve.addToAddressBook(name, person);
+
+			}
+
+		}
 	}
 
 	private void deleteDetails() {
 		String name = UtilScanner.getString(" First Name To Delete : ");
 		PersonContact person = serve.getPerson(name);
 		serve.deletePerson(person);
-		}
+	}
 
 	private void editDetails() {
 		String name = UtilScanner.getString(" Person Name to Update : ");
