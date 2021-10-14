@@ -1,7 +1,14 @@
 package advanceaddressbook.AddressBook.serviceimpl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.commons.collections4.MultiMap;
+import org.apache.commons.collections4.map.MultiValueMap;
 
 import advanceaddressbook.AddressBook.entity.PersonContact;
 import advanceaddressbook.AddressBook.service.IPersonService;
@@ -9,7 +16,8 @@ import advanceaddressbook.AddressBook.service.IPersonService;
 public class PersonServiceImpl implements IPersonService {
 
 	List<PersonContact> contact = new ArrayList<PersonContact>();
-
+    MultiMap<String, PersonContact> book = new MultiValueMap();
+    
 	@Override
 	public void addPerson(PersonContact person) {
 		contact.add(person);
@@ -29,6 +37,13 @@ public class PersonServiceImpl implements IPersonService {
 
 	public void deletePerson(PersonContact name) {
 		contact.remove(name);
+	}
+
+	public void addToAddressBook(String name, PersonContact person) {
+		book.put(name, person);
+		System.out.println(book.toString());
+		
+		
 	}
 	
 	
