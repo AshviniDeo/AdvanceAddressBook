@@ -1,5 +1,7 @@
 package advanceaddressbook.AddressBook.entity;
 
+import java.util.Objects;
+
 public class PersonContact {
 	
 	String fname;
@@ -63,5 +65,21 @@ public class PersonContact {
 		return "PersonContact [fname : " + fname + ", lname : " + lname + ", address : " + address + ", city : " + city
 				+ ", state : " + state + ", zipcode : " + zipcode + ", phone : " + phone + ", email : " + email + "]";
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(fname);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PersonContact other = (PersonContact) obj;
+		return Objects.equals(fname, other.fname);
+	}
+	
 	
 }

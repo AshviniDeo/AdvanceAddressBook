@@ -1,11 +1,8 @@
 package advanceaddressbook.AddressBook.serviceimpl;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -18,8 +15,9 @@ import advanceaddressbook.AddressBook.service.IPersonService;
 public class PersonServiceImpl implements IPersonService {
 
 	List<PersonContact> contact = new ArrayList<PersonContact>();
-    MultiMap<String, PersonContact> book = new MultiValueMap();
-    
+	MultiMap<String, PersonContact> book = new MultiValueMap();
+	Set<PersonContact> element = new HashSet<PersonContact>();
+
 	@Override
 	public void addPerson(PersonContact person) {
 		contact.add(person);
@@ -42,13 +40,18 @@ public class PersonServiceImpl implements IPersonService {
 	}
 
 	public void addToAddressBook(String name, PersonContact person) {
-		book.put(name, person);
+
+		element.add(person);
 		
+			if (!book.containsValue(element)) {
+				book.put(name, element);
+			}
+			
+		System.out.println(book.toString());
+
 		for (Entry<String, Object> personContact : book.entrySet()) {
-			System.out.println("Addressbook->"+ personContact.getKey());
+			System.out.println("Addressbook->" + personContact.getKey());
 		}
 	}
-	
-	
 
 }
