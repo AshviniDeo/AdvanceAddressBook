@@ -1,16 +1,18 @@
 package advanceaddressbook.AddressBook.serviceimpl;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.Collection;
+import java.io.IOException;
 import java.util.Dictionary;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.List;
-import java.util.Map;
+
 import java.util.Map.Entry;
+import java.util.Scanner;
 import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
+
 
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
@@ -31,6 +33,9 @@ public class PersonServiceImpl implements IPersonService {
 		for (PersonContact personContact : contact) {
 			System.out.println(personContact.toString());
 		}
+		String name = UtilScanner.getString(" name of address book");
+		book.put(name, person);
+		System.out.println(book.toString());
 	}
 
 	public PersonContact getPerson(String name) {
@@ -52,7 +57,11 @@ public class PersonServiceImpl implements IPersonService {
 
 		if (!book.containsValue(element)) {
 			book.put(name, element);
-		}
+		}else if(!book.containsKey(name)) {
+			book.put(name, element);
+		}else if(book.containsKey(name)) {
+			book.put(name, element);
+		 }
 
 		System.out.println(book.toString());
 
@@ -118,6 +127,31 @@ public class PersonServiceImpl implements IPersonService {
 		}
 		
 			
+	}
+
+	public void readContact() {
+		try {
+			File file = new File("AddressBook.txt");
+			if(file.exists()) {
+				FileWriter write = new FileWriter(file);
+				write.write(book.toString());
+				write.close();
+				Scanner reader = new Scanner(file);
+				while (reader.hasNextLine()) {
+					String data = reader.nextLine();
+					System.out.println(data);
+				}
+				reader.close();
+				
+			}else {
+				System.out.println("Already Exist");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
 	}
 
 }

@@ -16,7 +16,7 @@ public class DashBoard {
 			System.out.println(" :: Main Menu ::");
 			System.out.println(
 					"  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n  4.Add Contact to AddressBook \n  5.Search Contact \n  "
-							+ "6.Display Contact \n  7.Get Phone Number \n  8.Sort Contact\\n");
+							+ "6.Display Contact \n  7.Get Phone Number \n  8.Sort Contact\n  9.Contact To File\n  ");
 			int choice = UtilScanner.getInt(" Your Choice : ");
 
 			switch (choice) {
@@ -51,6 +51,10 @@ public class DashBoard {
 			case 8:
 				sortDetails();
 				break;
+				
+			case 9:
+				detailsToFile();
+				break;
 
 			default:
 				break;
@@ -58,6 +62,11 @@ public class DashBoard {
 
 		}
 
+	}
+
+	private void detailsToFile() {
+		serve.readContact();
+		
 	}
 
 	private void sortDetails() {
