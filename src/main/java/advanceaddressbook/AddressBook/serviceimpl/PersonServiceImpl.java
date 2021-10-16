@@ -1,9 +1,15 @@
 package advanceaddressbook.AddressBook.serviceimpl;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Dictionary;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -13,9 +19,13 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 
-
 import org.apache.commons.collections4.MultiMap;
 import org.apache.commons.collections4.map.MultiValueMap;
+
+import com.google.gson.Gson;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+import com.opencsv.exceptions.CsvValidationException;
 
 import advanceaddressbook.AddressBook.entity.PersonContact;
 import advanceaddressbook.AddressBook.service.IPersonService;
@@ -57,11 +67,11 @@ public class PersonServiceImpl implements IPersonService {
 
 		if (!book.containsValue(element)) {
 			book.put(name, element);
-		}else if(!book.containsKey(name)) {
+		} else if (!book.containsKey(name)) {
 			book.put(name, element);
-		}else if(book.containsKey(name)) {
+		} else if (book.containsKey(name)) {
 			book.put(name, element);
-		 }
+		}
 
 		System.out.println(book.toString());
 
@@ -101,38 +111,43 @@ public class PersonServiceImpl implements IPersonService {
 	}
 
 	public void getNumber(String data) {
-		
-		element.stream().forEach(a->{if(a.getCity().equals(data) || a.getState().equals(data)) System.out.println(data + "->"+a.getFname()+ " " +a.getLname()+" : " + a.getPhone());});
-		
-		
+
+		element.stream().forEach(a -> {
+			if (a.getCity().equals(data) || a.getState().equals(data))
+				System.out.println(data + "->" + a.getFname() + " " + a.getLname() + " : " + a.getPhone());
+		});
+
 	}
 
 	public void sortContact() {
-		element.stream().sorted((o1,o2)-> o1.getFname().compareToIgnoreCase(o2.getFname())).forEach(System.out::println);
+		element.stream().sorted((o1, o2) -> o1.getFname().compareToIgnoreCase(o2.getFname()))
+				.forEach(System.out::println);
 		String data = UtilScanner.getString(" City,State or zipcode : ").toUpperCase();
 		switch (data) {
 		case "CITY":
-			element.stream().sorted((o1,o2)-> o1.getCity().compareToIgnoreCase(o2.getCity())).forEach(System.out::println);
+			element.stream().sorted((o1, o2) -> o1.getCity().compareToIgnoreCase(o2.getCity()))
+					.forEach(System.out::println);
 			break;
-			
+
 		case "STATE":
-			element.stream().sorted((o1,o2)-> o1.getState().compareToIgnoreCase(o2.getState())).forEach(System.out::println);
+			element.stream().sorted((o1, o2) -> o1.getState().compareToIgnoreCase(o2.getState()))
+					.forEach(System.out::println);
 			break;
-			
+
 		case "ZIPCODE":
-			element.stream().sorted((o1,o2)-> o1.getZipcode().compareToIgnoreCase(o2.getZipcode())).forEach(System.out::println);
+			element.stream().sorted((o1, o2) -> o1.getZipcode().compareToIgnoreCase(o2.getZipcode()))
+					.forEach(System.out::println);
 
 		default:
 			break;
 		}
-		
-			
+
 	}
 
 	public void readContact() {
 		try {
 			File file = new File("AddressBook.txt");
-			if(file.exists()) {
+			if (file.exists()) {
 				FileWriter write = new FileWriter(file);
 				write.write(book.toString());
 				write.close();
@@ -142,15 +157,30 @@ public class PersonServiceImpl implements IPersonService {
 					System.out.println(data);
 				}
 				reader.close();
-				
-			}else {
+
+			} else {
 				System.out.println("Already Exist");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
+	}
+
+	public void contactToJson() throws IOException {
+        Gson gson = new Gson();
 		
+		String jsonString = gson.toJson(book);
 		
+		System.out.println(jsonString);
+		
+		File file = new File("AddressBook.json");
+		
+		FileWriter fileWriter = new FileWriter(file);
+		
+		fileWriter.write(jsonString);
+		
+		fileWriter.close();
 		
 	}
 

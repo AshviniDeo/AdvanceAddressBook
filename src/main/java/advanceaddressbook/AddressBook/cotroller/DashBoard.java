@@ -1,5 +1,7 @@
 package advanceaddressbook.AddressBook.cotroller;
 
+import java.io.IOException;
+
 import advanceaddressbook.AddressBook.entity.PersonContact;
 import advanceaddressbook.AddressBook.service.IPersonService;
 import advanceaddressbook.AddressBook.serviceimpl.PersonServiceImpl;
@@ -16,7 +18,7 @@ public class DashBoard {
 			System.out.println(" :: Main Menu ::");
 			System.out.println(
 					"  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n  4.Add Contact to AddressBook \n  5.Search Contact \n  "
-							+ "6.Display Contact \n  7.Get Phone Number \n  8.Sort Contact\n  9.Contact To File\n  ");
+							+ "6.Display Contact \n  7.Get Phone Number \n  8.Sort Contact\n  9.Contact To File\n  10.Contacts to JSON \n  11.Exit ");
 			int choice = UtilScanner.getInt(" Your Choice : ");
 
 			switch (choice) {
@@ -55,6 +57,14 @@ public class DashBoard {
 			case 9:
 				detailsToFile();
 				break;
+				
+			case 10:
+				detailsToJson();
+				break;
+				
+			case 11: exit = true;
+			 System.out.println("Thank you..!!");
+			 break;
 
 			default:
 				break;
@@ -63,6 +73,18 @@ public class DashBoard {
 		}
 
 	}
+
+	
+	private void detailsToJson() {
+		try {
+			serve.contactToJson();
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+
 
 	private void detailsToFile() {
 		serve.readContact();
