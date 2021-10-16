@@ -16,7 +16,7 @@ public class DashBoard {
 			System.out.println(" :: Main Menu ::");
 			System.out.println(
 					"  1.Add Contact \n  2.Edit Contact\n  3.Delete Contact \n  4.Add Contact to AddressBook \n  5.Search Contact \n  "
-					+ "6.Display Contact \n  7.Get Phone Number \n  8.Sort Contact\\n");
+							+ "6.Display Contact \n  7.Get Phone Number \n  8.Sort Contact\\n");
 			int choice = UtilScanner.getInt(" Your Choice : ");
 
 			switch (choice) {
@@ -35,21 +35,22 @@ public class DashBoard {
 			case 4:
 				addContactToAddressBook();
 				break;
-				
+
 			case 5:
 				serachDetails();
 				break;
-				
-			case 6: 
+
+			case 6:
 				displayDetails();
 				break;
-				
+
 			case 7:
 				getNumberDetail();
 				break;
-				
-			case 8: sortDetails();
-			 		break;
+
+			case 8:
+				sortDetails();
+				break;
 
 			default:
 				break;
@@ -58,28 +59,28 @@ public class DashBoard {
 		}
 
 	}
-private void sortDetails() {
-	serve.sortContact();
-		
+
+	private void sortDetails() {
+		serve.sortContact();
+
 	}
 
-private void getNumberDetail() {
-	String data = UtilScanner.getString(" City or State to get number : ");
-	serve.getNumber(data);
-		
-	}
+	private void getNumberDetail() {
+		String data = UtilScanner.getString(" City or State to get number : ");
+		serve.getNumber(data);
 
+	}
 
 	private void displayDetails() {
 		String data = UtilScanner.getString(" City or State : ").toUpperCase();
 		serve.displayContact(data);
-		
+
 	}
 
 	private void serachDetails() {
 		String data = UtilScanner.getString(" City Name or State Name to search : ");
 		serve.searchContact(data);
-		
+
 	}
 
 	private void addContactToAddressBook() {

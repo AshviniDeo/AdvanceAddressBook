@@ -17,6 +17,7 @@ import org.apache.commons.collections4.map.MultiValueMap;
 
 import advanceaddressbook.AddressBook.entity.PersonContact;
 import advanceaddressbook.AddressBook.service.IPersonService;
+import advanceaddressbook.AddressBook.utility.UtilScanner;
 
 public class PersonServiceImpl implements IPersonService {
 
@@ -99,6 +100,23 @@ public class PersonServiceImpl implements IPersonService {
 
 	public void sortContact() {
 		element.stream().sorted((o1,o2)-> o1.getFname().compareToIgnoreCase(o2.getFname())).forEach(System.out::println);
+		String data = UtilScanner.getString(" City,State or zipcode : ").toUpperCase();
+		switch (data) {
+		case "CITY":
+			element.stream().sorted((o1,o2)-> o1.getCity().compareToIgnoreCase(o2.getCity())).forEach(System.out::println);
+			break;
+			
+		case "STATE":
+			element.stream().sorted((o1,o2)-> o1.getState().compareToIgnoreCase(o2.getState())).forEach(System.out::println);
+			break;
+			
+		case "ZIPCODE":
+			element.stream().sorted((o1,o2)-> o1.getZipcode().compareToIgnoreCase(o2.getZipcode())).forEach(System.out::println);
+
+		default:
+			break;
+		}
+		
 			
 	}
 
