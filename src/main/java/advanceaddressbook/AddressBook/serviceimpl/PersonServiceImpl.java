@@ -1,6 +1,7 @@
 package advanceaddressbook.AddressBook.serviceimpl;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Dictionary;
 import java.util.HashSet;
 import java.util.Hashtable;
@@ -87,6 +88,18 @@ public class PersonServiceImpl implements IPersonService {
 			System.out.println("No contacts Available.");
 		}
 
+	}
+
+	public void getNumber(String data) {
+		
+		element.stream().forEach(a->{if(a.getCity().equals(data) || a.getState().equals(data)) System.out.println(data + "->"+a.getFname()+ " " +a.getLname()+" : " + a.getPhone());});
+		
+		
+	}
+
+	public void sortContact() {
+		element.stream().sorted((o1,o2)-> o1.getFname().compareToIgnoreCase(o2.getFname())).forEach(System.out::println);
+			
 	}
 
 }
